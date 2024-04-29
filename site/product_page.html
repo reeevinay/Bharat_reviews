@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    /* Global Styles */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    /* Navbar Styles */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #333;
+        padding: 10px 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .brand-logo {
+        width: 100px;
+    }
+    .nav-links {
+        display: flex;
+        gap: 20px;
+    }
+    .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+    .nav-links a:hover {
+        color: #ff5e78;
+    }
+    .search-bar {
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 5px;
+        margin-left: auto;
+    }
+    .search-bar input[type="text"] {
+        border: none;
+        padding: 8px;
+        width: 200px;
+        border-radius: 5px;
+        outline: none;
+    }
+    .search-bar button {
+        background-color: #ff5e78;
+        color: #fff;
+        border: none;
+        padding: 8px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .search-bar button:hover {
+        background-color: #d42d4f;
+    }
+    .auth-links {
+        display: flex;
+        gap: 10px;
+    }
+    .auth-links a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+    .auth-links a:hover {
+        color: #ff5e78;
+    }
+    /* Product Styles */
+    .product-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 20px 0;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    .product-image {
+        flex: 1;
+        max-width: 50%;
+        overflow: hidden;
+        position: relative;
+    }
+    .product-image img {
+        max-width: 100%;
+        height: auto;
+        transition: transform 0.3s ease;
+    }
+    .product-image img:hover {
+        transform: scale(1.1);
+    }
+    .image-gallery {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    .image-gallery img {
+        max-width: 80px;
+        height: auto;
+        margin-right: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+    }
+    .image-gallery img:hover {
+        transform: scale(1.1);
+    }
+    .product-details {
+        flex: 1;
+        max-width: 50%;
+        padding: 20px;
+    }
+    .product-details h2 {
+        color: #333;
+        margin-bottom: 10px;
+        font-size: 28px;
+    }
+    .product-details p {
+        color: #666;
+        margin-bottom: 8px;
+        line-height: 1.6;
+    }
+    .product-options {
+        margin-bottom: 20px;
+    }
+    .product-options label {
+        font-weight: bold;
+        margin-right: 10px;
+    }
+    .product-options select {
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    .buy-button {
+        padding: 12px 24px;
+        background-color: #ff5e78;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 18px;
+        text-transform: uppercase;
+    }
+    .buy-button:hover {
+        background-color: #d42d4f;
+    }
+    .checkout-button {
+        padding: 12px 24px;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 18px;
+        text-transform: uppercase;
+    }
+    .checkout-button:hover {
+        background-color: #555;
+    }
+    .product-info-container {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .product-info-container h3 {
+        color: #333;
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+    .product-info-container p {
+        color: #666;
+        margin-bottom: 8px;
+        line-height: 1.6;
+    }
+    .product-info-container strong {
+        font-weight: bold;
+    }
+    .product-info-container .videos-container {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    .video-section {
+        margin-bottom: 20px;
+    }
+    .video-section h4 {
+        color: #333;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .video-section video {
+        max-width: 100%;
+        height: 600px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .divider {
+        border-bottom: 1px solid #ccc;
+        margin: 20px 0;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="nav-left">
+                <a href="#" class="brand-logo"><img src="your-brand-logo.png" alt="Brand Logo"></a>
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#">Features</a>
+                    <a href="#">Shop</a>
+                    <a href="#">About Us</a>
+                </div>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search products...">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="auth-links">
+                <a href="#">Login</a>
+                <a href="#">Sign Up</a>
+            </div>
+        </div>
+
+        <!-- Product Preview and Details -->
+        <div class="product-container">
+            <div class="product-image">
+                <img src="https://via.placeholder.com/800x600" alt="Product Image">
+                <div class="image-gallery">
+                    <img src="https://via.placeholder.com/150" alt="Product Thumbnail 1">
+                    <img src="https://via.placeholder.com/150" alt="Product Thumbnail 2">
+                    <img src="https://via.placeholder.com/150" alt="Product Thumbnail 3">
+                </div>
+            </div>
+            <div class="product-details">
+                <h2>Fantasy Smart Watch</h2>
+                <div class="product-options">
+                    <label for="color-select">Color:</label>
+                    <select id="color-select" onchange="updatePrice()">
+                        <option value="black">Black</option>
+                        <option value="silver">Silver</option>
+                        <option value="rose-gold">Rose Gold</option>
+                        <option value="blue">Blue</option>
+                    </select>
+                    <label for="size-select">Size:</label>
+                    <select id="size-select" onchange="updatePrice()">
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                    </select>
+                    <p id="product-price">$149.99</p>
+                </div>
+                <button class="buy-button" onclick="addToCart()">Add to Cart</button>
+                <button class="checkout-button">Checkout</button>
+            </div>
+        </div>
+
+        <!-- Product Information Section -->
+        <div class="product-info-container">
+            <div class="videos-container">
+                <div class="video-section">
+                    <h4>Positive Reviews</h4>
+                    <div class="divider"></div>
+                    <div class="videos">
+                        <video controls>
+                            <source src="video1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls>
+                            <source src="video2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls>
+                            <source src="video3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="video-section">
+                    <h4>Negative Reviews</h4>
+                    <div class="divider"></div>
+                    <div class="videos">
+                        <video controls>
+                            <source src="video4.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls>
+                            <source src="video5.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls>
+                            <source src="video6.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Update price based on selected options
+            function updatePrice() {
+                const color = document.getElementById('color-select').value;
+                const size = document.getElementById('size-select').value;
+                let price;
+
+                // Update price based on product
+                if (color === 'black') {
+                    if (size === 'S') price = '$149.99';
+                    else if (size === 'M') price = '$159.99';
+                    else price = '$169.99';
+                } else if (color === 'silver') {
+                    if (size === 'S') price = '$139.99';
+                    else if (size === 'M') price = '$149.99';
+                    else price = '$159.99';
+                } else if (color === 'rose-gold') {
+                    if (size === 'S') price = '$159.99';
+                    else if (size === 'M') price = '$169.99';
+                    else price = '$179.99';
+                } else if (color === 'blue') {
+                    if (size === 'S') price = '$169.99';
+                    else if (size === 'M') price = '$179.99';
+                    else price = '$189.99';
+                }
+
+                document.getElementById('product-price').innerText = price;
+            }
+
+            // Add item to mini cart
+            function addToCart() {
+                const miniCart = document.getElementById('mini-cart');
+                const productName = document.querySelector('.product-details h2').innerText;
+                const productPrice = document.getElementById('product-price').innerText;
+
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <span>${productName}</span>
+                    <span>${productPrice}</span>
+                `;
+                miniCart.insertBefore(cartItem, miniCart.childNodes[miniCart.childNodes.length - 2]);
+            }
+        </script>
+    </div>
+</body>
+</html>
